@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Portfolio - Celestin Signe Sighano
 
 Site portfolio personnel de Celestin Signe Sighano, Junior Data Scientist.
@@ -113,3 +114,7 @@ GitHub Pages mettra automatiquement à jour le site en quelques minutes.
 - LinkedIn : [Celestin Signe Sighano](https://www.linkedin.com/in/celestin-signe-sighano-52974a37/)
 - GitHub : [SighanoCel](https://github.com/SighanoCel)
 
+=======
+# My-data-science-project
+This repository has been created to store and share my Data science projects
+>>>>>>> f189e01bf82733267f607b7b5e73b18b95b39b26
