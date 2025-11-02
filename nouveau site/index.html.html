@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portfolio</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f8f9fa;
+      color: #333;
+    }
+    header {
+      background: #1e1e2f;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5em;
+    }
+    nav {
+      margin-top: 10px;
+    }
+    nav a {
+      margin: 0 15px;
+      color: #f8f9fa;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    section {
+      padding: 40px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    h2 {
+      color: #1e1e2f;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 5px;
+    }
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .project {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .project img {
+      width: 100%;
+      border-radius: 8px;
+    }
+    .download-btn {
+      display: inline-block;
+      padding: 12px 20px;
+      background: #1e1e2f;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+    .download-btn:hover {
+      background: #333;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #1e1e2f;
+      color: white;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>My Portfolio</h1>
+    <nav>
+      <a href="#about">About Me</a>
+      <a href="#projects">Projects</a>
+      <a href="#cv">CV</a>
+    </nav>
+  </header>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p>Hello! My name is [Your Name]. I am passionate about Machine Learning and Artificial Intelligence.
+       I enjoy building models, analyzing data, and creating innovative solutions. Welcome to my portfolio!</p>
+  </section>
+
+  <section id="projects">
+    <h2>My Projects</h2>
+    <div class="projects">
+      <div class="project">
+        <img src="project1.jpg" alt="Project 1">
+        <h3>Project Title 1</h3>
+        <p>Short description of your machine learning project. Explain the problem and your solution.</p>
+        <a href="https://github.com/yourusername/project1" target="_blank">View on GitHub</a>
+      </div>
+      <div class="project">
+        <img src="project2.jpg" alt="Project 2">
+        <h3>Project Title 2</h3>
+        <p>Another interesting project with ML techniques. Showcase results and visualization.</p>
+        <a href="https://github.com/yourusername/project2" target="_blank">View on GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="cv">
+    <h2>Download My CV</h2>
+    <p>You can download my resume here:</p>
+    <a class="download-btn" href="CV.pdf" download>Download CV</a>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 [Your Name] - All rights reserved.</p>
+  </footer>
+
+</body>
+</html>  
