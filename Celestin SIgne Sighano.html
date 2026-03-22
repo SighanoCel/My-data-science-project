@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -20,7 +20,7 @@
                 <a href="#apropos" class="nav-link">About</a>
                 <a href="#education" class="nav-link">Education</a>
                 <a href="#competences" class="nav-link">Skills</a>
-                <a href="#projets" class="nav-link">Portfolio</a>
+                <a href="#projets" class="nav-link">My projects</a>
                 <a href="#cv" class="nav-link">CV</a>
                 <a href="#contact" class="nav-link">Contact</a>    
             </div>
@@ -41,7 +41,7 @@
                 </h1>
                 <p class="hero-subtitle">Junior Data Scientist</p>
                 <p class="hero-description">
-                    I'm a junior data scientist with a passion for data analysis machine learning,deep learning and generative IA.
+                    I'm a junior data scientist with passion for data analysis machine learning,deep learning and generative IA.
                 </p>
                 <div class="hero-buttons">
                     <a href="#projets" class="btn btn-primary">Here are my projects</a>
@@ -122,11 +122,13 @@
                 </div>
                 <div class="education-card">
                     <div class="edu-header">
-                        <h3>Master Degree</h3>
-                        <span class="edu-period">YYYY - YYYY</span>
+                        <h3>Double Master Degree in Data Science</h3>
+                        <span class="edu-period">2025 - 2026</span>
                     </div>
-                    <p class="edu-school">University / School name</p>
-                    <p class="edu-desc">Brief description of specialization, thesis or projects.</p>
+                    <p class="edu-school">RBS (Rome Business School)-Italy and Universidad internacional de Valencia-Spain</p>
+                    <p class="edu-desc">Program drawned to develop a solid foundation in data analysis, 
+                        Python-based workflows, and key concepts in statistics and machine learning, 
+                        learning how to use data to guide decisions and shape strategy</p>
                 </div>
                 <div class="education-card">
                     <div class="edu-header">
@@ -298,7 +300,7 @@
     <!-- Section Projets -->
     <section id="projets" class="projects">
         <div class="container">
-            <h2 class="section-title">My Portfolio</h2>
+            <h2 class="section-title">My projects</h2>
             <p class="notebook-hint" style="text-align:center; margin:-2rem 0 3rem; color:#6B4E3D;">
             </p>
             <div class="projects-grid">
@@ -315,10 +317,10 @@
                             Beyond churn prediction, the model’s probability scores (churn risk) will be
                              binned to support a Return on Investment (ROI) analysis.</p>
                         <div class="project-tech">
-                            <span>Python</span>
-                            <span>Jupyter</span>
-                            <span>Pandas</span>
-                            <span>Seaborn</span>
+                            <span>Tensorflow</span>
+                            <span>Keras</span>
+                            <span>Sequential Model</span>
+                            <span>Dense layer</span>
                         </div>
                         <div class="project-links">
                             <a href="https://github.com/SighanoCel/My-data-science-project/blob/main/banking_churn_with_deep_learning.ipynb" class="project-link" title="Lien vers le notebook ou dépôt"><i class="fas fa-external-link-alt"></i></a>
@@ -331,10 +333,11 @@
                         <img src="Churn immage illustration.jpg" alt="Banking Churn illustration" loading="lazy"/>
                     </div>
                     <div class="project-content">
-                        <h3>Banking Churn Prediction/ Bank Customer Retention</h3>
+                        <h3>Bank Customer Retention with Decision Tree model</h3>
                         <p>Predicting the churn probabilities from bank services and presenting the ROI to Business Users</p>
                         <div class="project-tech">
                             <span>scikit-learn & imblearn</span>
+                            <span>Decision Tree Model</span>
                             <span>Pandas</span>
                             <span>Matplotlib & Seaborn</span>
                             <span>Numpy</span>
@@ -352,10 +355,12 @@
                         <img src="Renting Price photo illustration.jpg" alt="House Renting Price illustration" loading="lazy"/>
                     </div>
                     <div class="project-content">
-                        <h3>House Renting Price Prediction(Real Estate)</h3>
+                        <h3>Renting Price Prediction with Linear and Polynomial Regression</h3>
                         <p> The use of Data such as property features, location, and market conditions to estimate the rental price of a house or apartment.</p>
                         <div class="project-tech">
                             <span>scikit-learn</span>
+                            <span>Linear regression</span>
+                            <span>Polynomial converter</span>
                             <span>Pandas</span>
                             <span>Numpy</span>
                             <span>Matplotlib & Seaborn</span>
@@ -368,36 +373,40 @@
                 </div>
                 <div class="project-card" data-category="notebook">
                     <div class="project-image">
-                        <i class="fab fa-python"></i>
+                        <img src="Cancer-Prediction.png" alt="Cancer Disease illustration" loading="lazy"/>
                     </div>
                     <div class="project-content">
-                        <h3>Clustering - Segmentation</h3>
-                        <p>Expérimentations KMeans et évaluation silhouette.</p>
+                        <h3>Cancer Disease prediction with SVC Model</h3>
+                        <p>This notebook demonstrates a complete machine learning workflow for cancer diagnosis using 
+                           a Support Vector Classifier (SVC) with a linear kernel to highlight a common challenge 
+                           in medical diagnosis, where minimizing false negatives is critical</p>
                         <div class="project-tech">
-                            <span>KMeans</span>
-                            <span>PCA</span>
-                            <span>Seaborn</span>
+                            <span>SVC</span>
+                            <span>Confusion Matrix</span>
+                            <span>Precision & Recall</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://github.com/SighanoCel/My-data-science-project/blob/main/Cancer_prediction.ipynb" class="project-link"><i class="fas fa-external-link-alt"></i></a>
                             <a href="https://github.com/SighanoCel" class="project-link"><i class="fab fa-github"></i></a>
                         </div>
                     </div>
                 </div>
                 <div class="project-card" data-category="notebook">
                     <div class="project-image">
-                        <i class="fab fa-python"></i>
+                        <img src="Car Acceleration illustration.jpg" alt="Car acceleration illustration" loading="lazy"/>
                     </div>
                     <div class="project-content">
-                        <h3>Deep Learning - CNN</h3>
-                        <p>Prototype Keras: entraînement, courbes, évaluation.</p>
+                        <h3>Car performance prediction with Elastic Net Regression</h3>
+                        <p>Building a predictive model for car acceleration, 
+                            providing clear insights Through a SHAP, into which features are most 
+                            influential and how they impact the outcome.</p>
                         <div class="project-tech">
-                            <span>TensorFlow</span>
-                            <span>Keras</span>
-                            <span>Augmentation</span>
+                            <span>Elastic Net Regression</span>
+                            <span>GridSearchCV</span>
+                            <span>SHAP (shapley additive explanation)</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://github.com/SighanoCel/My-data-science-project/blob/main/Car_performance_prediction.ipynb" class="project-link"><i class="fas fa-external-link-alt"></i></a>
                             <a href="https://github.com/SighanoCel" class="project-link"><i class="fab fa-github"></i></a>
                         </div>
                     </div>
@@ -417,6 +426,115 @@
                         <div class="project-links">
                             <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
                             <a href="https://github.com/SighanoCel" class="project-link"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Cartes projets à venir au même format -->
+                <div class="project-card" data-category="notebook">
+                    <div class="project-image">
+                        <i class="fab fa-python"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Projet à venir #1</h3>
+                        <p>Espace réservé pour un futur projet.</p>
+                        <div class="project-tech">
+                            <span>Tech 1</span>
+                            <span>Tech 2</span>
+                            <span>Tech 3</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="#" class="project-link"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card" data-category="notebook">
+                    <div class="project-image">
+                        <i class="fab fa-python"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Projet à venir #2</h3>
+                        <p>Espace réservé pour un futur projet.</p>
+                        <div class="project-tech">
+                            <span>Tech 1</span>
+                            <span>Tech 2</span>
+                            <span>Tech 3</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="#" class="project-link"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card" data-category="notebook">
+                    <div class="project-image">
+                        <i class="fab fa-python"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Projet à venir #3</h3>
+                        <p>Espace réservé pour un futur projet.</p>
+                        <div class="project-tech">
+                            <span>Tech 1</span>
+                            <span>Tech 2</span>
+                            <span>Tech 3</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="#" class="project-link"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card" data-category="notebook">
+                    <div class="project-image">
+                        <i class="fab fa-python"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Projet à venir #4</h3>
+                        <p>Espace réservé pour un futur projet.</p>
+                        <div class="project-tech">
+                            <span>Tech 1</span>
+                            <span>Tech 2</span>
+                            <span>Tech 3</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="#" class="project-link"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card" data-category="notebook">
+                    <div class="project-image">
+                        <i class="fab fa-python"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Projet à venir #5</h3>
+                        <p>Espace réservé pour un futur projet.</p>
+                        <div class="project-tech">
+                            <span>Tech 1</span>
+                            <span>Tech 2</span>
+                            <span>Tech 3</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="#" class="project-link"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card" data-category="notebook">
+                    <div class="project-image">
+                        <i class="fab fa-python"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Projet à venir #6</h3>
+                        <p>Espace réservé pour un futur projet.</p>
+                        <div class="project-tech">
+                            <span>Tech 1</span>
+                            <span>Tech 2</span>
+                            <span>Tech 3</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="#" class="project-link"><i class="fab fa-github"></i></a>
                         </div>
                     </div>
                 </div>
