@@ -13,9 +13,9 @@
     --text-light: #9aa6b2;       /* secondary text */
     --text-white: #f0f6fc;
     --bg-color: #2a3447;         /* page background (more light navy) */
-    --bg-light: rgba(72, 86, 110, 0.35); /* section subtle contrast (transparent) */
+    --bg-light: rgba(72, 86, 110, 0.2); /* section subtle contrast (80% transparent) */
     --bg-dark: rgba(24, 30, 46, 0.78);  /* footer/nav dark (slightly transparent) */
-    --bg-card: rgba(72, 86, 110, 0.55);  /* cards/panels (more transparency) */
+    --bg-card: rgba(72, 86, 110, 0.2);  /* cards/panels (80% transparent) */
     --border-color: #444c56;     /* subtle borders */
     
     /* Typography */
