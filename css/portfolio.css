@@ -1006,6 +1006,17 @@ section {
     display: block;
 }
 
+.edu-logo-slot--double {
+    gap: .35rem;
+}
+
+.edu-logo-slot--double img {
+    width: auto;
+    height: 100%;
+    max-width: 46%;
+    object-fit: contain;
+}
+
 .edu-header {
     display: flex;
     justify-content: space-between;
