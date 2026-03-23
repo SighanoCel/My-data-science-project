@@ -4,19 +4,19 @@
     --primary-color: #539bf5; /* GitHub Dark Dimmed blue */
     --secondary-color: #316dca; /* darker accent */
     --accent-color: #539bf5; /* Accent */
-    --burgundy-dark: rgba(34, 39, 46, 0.55); /* Base dark (dimmed, semi-transparent) */
-    --burgundy-light: rgba(45, 51, 59, 0.35); /* Surface (dimmed, semi-transparent) */
+    --burgundy-dark: #22272e; /* Base dark (dimmed) */
+    --burgundy-light: #2d333b; /* Surface (dimmed) */
     --burgundy-gradient: linear-gradient(135deg, #316dca 0%, #4690ff 50%, #539bf5 100%);
     
     /* Neutral Colors - Dark Navy Theme */
     --text-color: #adbac7;       /* main text on dimmed */
     --text-light: #9aa6b2;       /* secondary text */
     --text-white: #f0f6fc;
-    --bg-color: rgba(42, 52, 71, 0.55);  /* page background (more light navy, transparent) */
-    --bg-light: rgba(72, 86, 110, 0.05); /* sections: 95% transparent */
-    --bg-dark: rgba(24, 30, 46, 0.25);  /* footer/nav: more transparent */
-    --bg-card: rgba(72, 86, 110, 0.05);  /* cards/panels: 95% transparent */
-    --border-color: rgba(68, 76, 86, 0.35); /* subtle borders */
+    --bg-color: #2a3447;         /* page background (more light navy) */
+    --bg-light: rgba(72, 86, 110, 0.2); /* section subtle contrast (80% transparent) */
+    --bg-dark: rgba(24, 30, 46, 0.78);  /* footer/nav dark (slightly transparent) */
+    --bg-card: rgba(72, 86, 110, 0.2);  /* cards/panels (80% transparent) */
+    --border-color: #444c56;     /* subtle borders */
     
     /* Typography */
     --font-primary: 'Inter', sans-serif;
@@ -87,7 +87,7 @@ body::before {
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(13, 17, 23, 0.55);
+    background: rgba(13, 17, 23, 0.9);
     backdrop-filter: blur(20px);
     z-index: 1000;
     transition: var(--transition);
