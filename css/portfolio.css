@@ -12,10 +12,10 @@
     --text-color: #adbac7;       /* main text on dimmed */
     --text-light: #9aa6b2;       /* secondary text */
     --text-white: #f0f6fc;
-    --bg-color: #22272e;         /* page background */
-    --bg-light: #2d333b;         /* section subtle contrast */
-    --bg-dark: #22272e;          /* footer/nav dark */
-    --bg-card: #2d333b;          /* cards/panels */
+    --bg-color: #2a3447;         /* page background (more light navy) */
+    --bg-light: rgba(72, 86, 110, 0.35); /* section subtle contrast (transparent) */
+    --bg-dark: rgba(24, 30, 46, 0.78);  /* footer/nav dark (slightly transparent) */
+    --bg-card: rgba(72, 86, 110, 0.55);  /* cards/panels (more transparency) */
     --border-color: #444c56;     /* subtle borders */
     
     /* Typography */
@@ -69,9 +69,9 @@ body::before {
     width: 100%;
     height: 100%;
     background: 
-        radial-gradient(circle at 20% 50%, rgba(56, 139, 253, 0.06) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(31, 111, 235, 0.05) 0%, transparent 50%),
-        radial-gradient(circle at 40% 80%, rgba(88, 166, 255, 0.05) 0%, transparent 50%);
+        radial-gradient(circle at 20% 50%, rgba(56, 139, 253, 0.10) 0%, transparent 55%),
+        radial-gradient(circle at 80% 20%, rgba(31, 111, 235, 0.08) 0%, transparent 55%),
+        radial-gradient(circle at 40% 80%, rgba(88, 166, 255, 0.08) 0%, transparent 55%);
     pointer-events: none;
     z-index: -1;
 }
