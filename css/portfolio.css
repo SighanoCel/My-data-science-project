@@ -1,4 +1,4 @@
-﻿/* Navy Blue Portfolio Theme */
+/* Navy Blue Portfolio Theme */
 :root {
     /* Navy Blue Color Palette */
     --primary-color: #539bf5; /* GitHub Dark Dimmed blue */
@@ -985,6 +985,25 @@ section {
 .education-card:hover {
     transform: translateY(-6px);
     box-shadow: var(--shadow-md);
+}
+
+.edu-logo-slot {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 1rem;
+    border: 1px dashed var(--primary-color);
+    background: rgba(229, 62, 62, 0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.edu-logo-slot img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
 }
 
 .edu-header {
