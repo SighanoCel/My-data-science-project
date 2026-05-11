@@ -776,6 +776,23 @@ section {
     display: block;
 }
 
+/* Uniquement — Bank Transaction Fraud Detection : vignette moins zoomée, zone un peu plus grande */
+.project-image.project-image--fraud-detection {
+    height: 275px;
+    min-height: 275px;
+}
+
+.project-image.project-image--fraud-detection img {
+    object-fit: contain;
+    object-position: center;
+    padding: 0.08rem;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    transform: scale(1.06);
+    transform-origin: center center;
+}
+
 .project-content {
     padding: 1.5rem;
 }
