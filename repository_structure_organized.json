@@ -1,0 +1,488 @@
+{
+  "organization_metadata": {
+    "created_date": "2026-05-13",
+    "branch": "organize-by-format",
+    "purpose": "Organize repository files by format into logical folders",
+    "total_files": 54,
+    "total_size_mb": 10.97
+  },
+  "organized_structure": {
+    "notebooks": {
+      "folder_name": "notebooks",
+      "description": "Jupyter Notebook files - Data Science Projects",
+      "file_count": 9,
+      "total_size_mb": 7.24,
+      "percentage_of_total": "66%",
+      "files": [
+        {
+          "original_name": "Bank_Customer_Churn.ipynb",
+          "new_path": "notebooks/Bank_Customer_Churn.ipynb",
+          "size_kb": 813.75,
+          "sha": "231e1f06c7d15f267f2a5f82d39dc55069dfbc9b",
+          "project": "Bank Customer Churn Analysis",
+          "new_url": "https://github.com/SighanoCel/My-data-science-project/blob/main/notebooks/Bank_Customer_Churn.ipynb"
+        },
+        {
+          "original_name": "Bank_transaction_fraud_detection.ipynb",
+          "new_path": "notebooks/Bank_transaction_fraud_detection.ipynb",
+          "size_kb": 1487.06,
+          "sha": "7587acbc66623786ee6b4edd064375eb4f6c47e9",
+          "project": "Bank Transaction Fraud Detection",
+          "new_url": "https://github.com/SighanoCel/My-data-science-project/blob/main/notebooks/Bank_transaction_fraud_detection.ipynb"
+        },
+        {
+          "original_name": "Cancer_prediction.ipynb",
+          "new_path": "notebooks/Cancer_prediction.ipynb",
+          "size_kb": 89.81,
+          "sha": "dbc0af253980d6045d8426e456ac31c3345f1af7",
+          "project": "Cancer Prediction",
+          "new_url": "https://github.com/SighanoCel/My-data-science-project/blob/main/notebooks/Cancer_prediction.ipynb"
+        },
+        {
+          "original_name": "Car_performance_prediction.ipynb",
+          "new_path": "notebooks/Car_performance_prediction.ipynb",
+          "size_kb": 1166.41,
+          "sha": "66f11ed84762bdafde033668d366ce4753ee331c",
+          "project": "Car Performance Prediction",
+          "new_url": "https://github.com/SighanoCel/My-data-science-project/blob/main/notebooks/Car_performance_prediction.ipynb"
+        },
+        {
+          "original_name": "Final_Capstone_business_analytics.ipynb",
+          "new_path": "notebooks/Final_Capstone_business_analytics.ipynb",
+          "size_kb": 2628.11,
+          "sha": "d4f5b23c6f44bdffe779ee005e9d8882675d1bad",
+          "project": "Capstone Business Analytics",
+          "new_url": "https://github.com/SighanoCel/My-data-science-project/blob/main/notebooks/Final_Capstone_business_analytics.ipynb"
+        },
+        {
+          "original_name": "House_rent_project.ipynb",
+          "new_path": "notebooks/House_rent_project.ipynb",
+          "size_kb": 163.23,
+          "sha": "697151487b89058fc526c96f0eb1964a561ea0a7",
+          "project": "House Rent Price Prediction",
+          "new_url": "https://github.com/SighanoCel/My-data-science-project/blob/main/notebooks/House_rent_project.ipynb"
+        },
+        {
+          "original_name": "banking_churn_with_deep_learning.ipynb",
+          "new_path": "notebooks/banking_churn_with_deep_learning.ipynb",
+          "size_kb": 428.40,
+          "sha": "39f94a59c602fc8fe6163336f7eb2b8126bfb8be",
+          "project": "Deep Learning Banking Churn",
+          "new_url": "https://github.com/SighanoCel/My-data-science-project/blob/main/notebooks/banking_churn_with_deep_learning.ipynb"
+        },
+        {
+          "original_name": "project_2_linear_regression.ipynb",
+          "new_path": "notebooks/project_2_linear_regression.ipynb",
+          "size_kb": 265.05,
+          "sha": "41b2f04fc552841f5d8ae21c83422a4051dc6fad",
+          "project": "Linear Regression Project 2",
+          "new_url": "https://github.com/SighanoCel/My-data-science-project/blob/main/notebooks/project_2_linear_regression.ipynb"
+        },
+        {
+          "original_name": "projet_1_linear_regression.ipynb",
+          "new_path": "notebooks/projet_1_linear_regression.ipynb",
+          "size_kb": 381.83,
+          "sha": "c847ed416bdb74e9cbab96e3c96c559cb696e550",
+          "project": "Linear Regression Project 1",
+          "new_url": "https://github.com/SighanoCel/My-data-science-project/blob/main/notebooks/projet_1_linear_regression.ipynb"
+        }
+      ]
+    },
+    "documentation": {
+      "folder_name": "docs",
+      "description": "Markdown documentation and guides",
+      "file_count": 9,
+      "total_size_mb": 0.03,
+      "percentage_of_total": "0.3%",
+      "files": [
+        {
+          "original_name": "README.md",
+          "new_path": "docs/README.md",
+          "size_kb": 4.14,
+          "sha": "f930cea802dd23f9f7a9366ded9c1cd0b643bc42",
+          "new_url": "https://github.com/SighanoCel/My-data-science-project/blob/main/docs/README.md"
+        },
+        {
+          "original_name": "COMMANDES_A_EXECUTER.md",
+          "new_path": "docs/COMMANDES_A_EXECUTER.md",
+          "size_kb": 2.22,
+          "sha": "9d704363c5bbfcd9baa3a84e0ce1b6af78824ae1",
+          "new_url": "https://github.com/SighanoCel/My-data-science-project/blob/main/docs/COMMANDES_A_EXECUTER.md"
+        },
+        {
+          "original_name": "CREER_DEPOT_PORTFOLIO.md",
+          "new_path": "docs/CREER_DEPOT_PORTFOLIO.md",
+          "size_kb": 1.07,
+          "sha": "486a73f65b5f08d0648d8cb741222c37124b0db0",
+          "new_url": "https://github.com/SighanoCel/My-data-science-project/blob/main/docs/CREER_DEPOT_PORTFOLIO.md"
+        },
+        {
+          "original_name": "DEPLOIEMENT.md",
+          "new_path": "docs/DEPLOIEMENT.md",
+          "size_kb": 2.01,
+          "sha": "3cef60c0640fcb719e2046317a4d19cde4db2e88",
+          "new_url": "https://github.com/SighanoCel/My-data-science-project/blob/main/docs/DEPLOIEMENT.md"
+        },
+        {
+          "original_name": "ETAPES_SIMPLES.md",
+          "new_path": "docs/ETAPES_SIMPLES.md",
+          "size_kb": 3.80,
+          "sha": "6a169c32abd92eaffab59be1c8497d742b8b083b",
+          "new_url": "https://github.com/SighanoCel/My-data-science-project/blob/main/docs/ETAPES_SIMPLES.md"
+        },
+        {
+          "original_name": "GUIDE_AUTHENTIFICATION_DETAILLE.md",
+          "new_path": "docs/GUIDE_AUTHENTIFICATION_DETAILLE.md",
+          "size_kb": 3.15,
+          "sha": "a69638b707b76a12619e4891e6cd63eb43bb8b5d",
+          "new_url": "https://github.com/SighanoCel/My-data-science-project/blob/main/docs/GUIDE_AUTHENTIFICATION_DETAILLE.md"
+        },
+        {
+          "original_name": "GUIDE_COMPLET_DEPLOIEMENT.md",
+          "new_path": "docs/GUIDE_COMPLET_DEPLOIEMENT.md",
+          "size_kb": 5.81,
+          "sha": "92e7b9cbc7c034def77dc325653aee08ba8a61e6",
+          "new_url": "https://github.com/SighanoCel/My-data-science-project/blob/main/docs/GUIDE_COMPLET_DEPLOIEMENT.md"
+        },
+        {
+          "original_name": "INSTALLATION_GIT.md",
+          "new_path": "docs/INSTALLATION_GIT.md",
+          "size_kb": 1.20,
+          "sha": "2609dd66a6a7edc226525b1d3b07561cf84ab5a9",
+          "new_url": "https://github.com/SighanoCel/My-data-science-project/blob/main/docs/INSTALLATION_GIT.md"
+        },
+        {
+          "original_name": "RESUME_SITUATION.md",
+          "new_path": "docs/RESUME_SITUATION.md",
+          "size_kb": 1.99,
+          "sha": "82891048010e3691b4a85f449ef4f7e9123c941d",
+          "new_url": "https://github.com/SighanoCel/My-data-science-project/blob/main/docs/RESUME_SITUATION.md"
+        }
+      ]
+    },
+    "pdfs": {
+      "folder_name": "pdfs",
+      "description": "PDF documents - CVs and Reports",
+      "file_count": 4,
+      "total_size_mb": 2.79,
+      "percentage_of_total": "25%",
+      "files": [
+        {
+          "original_name": "CV_Junior_data_scientist.pdf",
+          "new_path": "pdfs/CV_Junior_data_scientist.pdf",
+          "size_kb": 517.61,
+          "sha": "7e413afca0b8358f8212b108fd1ad3ad6158435c",
+          "new_url": "https://github.com/SighanoCel/My-data-science-project/blob/main/pdfs/CV_Junior_data_scientist.pdf"
+        },
+        {
+          "original_name": "Capstone_FinalReport.pdf",
+          "new_path": "pdfs/Capstone_FinalReport.pdf",
+          "size_kb": 1741.26,
+          "sha": "f41b1e183bc3d42e8081e280e8bcedf85703c99b",
+          "new_url": "https://github.com/SighanoCel/My-data-science-project/blob/main/pdfs/Capstone_FinalReport.pdf"
+        },
+        {
+          "original_name": "data_Science_CV_english.pdf",
+          "new_path": "pdfs/data_Science_CV_english.pdf",
+          "size_kb": 518.34,
+          "sha": "2502154698a96b61c882e3dd9914063a5473ae08",
+          "new_url": "https://github.com/SighanoCel/My-data-science-project/blob/main/pdfs/data_Science_CV_english.pdf"
+        },
+        {
+          "original_name": "cv.pdf",
+          "new_path": "pdfs/cv.pdf",
+          "size_kb": 0.62,
+          "sha": "70514bd5d0fbee4f063a6358d2b22fa87b43e5c6",
+          "new_url": "https://github.com/SighanoCel/My-data-science-project/blob/main/pdfs/cv.pdf"
+        }
+      ]
+    },
+    "images": {
+      "folder_name": "images",
+      "description": "Image files - PNG, JPG, JPEG, GIF",
+      "file_count": 18,
+      "total_size_mb": 0.57,
+      "percentage_of_total": "5%",
+      "files": [
+        {
+          "original_name": "Cancer-Prediction.png",
+          "new_path": "images/Cancer-Prediction.png",
+          "size_kb": 834.25,
+          "type": "PNG",
+          "sha": "896c8830ca5bc0208eb0f7f927be5039cb079dc5",
+          "new_url": "https://github.com/SighanoCel/My-data-science-project/blob/main/images/Cancer-Prediction.png"
+        },
+        {
+          "original_name": "Car Acceleration illustration.jpg",
+          "new_path": "images/Car Acceleration illustration.jpg",
+          "size_kb": 504.93,
+          "type": "JPG",
+          "sha": "873ca5457b12d383b12685ebed70ad188fb53106",
+          "new_url": "https://github.com/SighanoCel/My-data-science-project/blob/main/images/Car%20Acceleration%20illustration.jpg"
+        },
+        {
+          "original_name": "Churn Customer.JPG",
+          "new_path": "images/Churn Customer.JPG",
+          "size_kb": 146.62,
+          "type": "JPG",
+          "sha": "5d5736ec2002576e649f1b6666eaabc393484b65",
+          "new_url": "https://github.com/SighanoCel/My-data-science-project/blob/main/images/Churn%20Customer.JPG"
+        },
+        {
+          "original_name": "Churn immage illustration.jpg",
+          "new_path": "images/Churn immage illustration.jpg",
+          "size_kb": 341.62,
+          "type": "JPG",
+          "sha": "9fa4f47847f3ae07f606c8a6ef54cb557aaf6e83",
+          "new_url": "https://github.com/SighanoCel/My-data-science-project/blob/main/images/Churn%20immage%20illustration.jpg"
+        },
+        {
+          "original_name": "Data-Driven-Logistica-immage.jpg",
+          "new_path": "images/Data-Driven-Logistica-immage.jpg",
+          "size_kb": 146.05,
+          "type": "JPG",
+          "sha": "ff2abe5d5a2aff96cfd65add4df38ea3e23841c1",
+          "new_url": "https://github.com/SighanoCel/My-data-science-project/blob/main/images/Data-Driven-Logistica-immage.jpg"
+        },
+        {
+          "original_name": "Renting Price photo illustration.jpg",
+          "new_path": "images/Renting Price photo illustration.jpg",
+          "size_kb": 3268.27,
+          "type": "JPG",
+          "sha": "4134e740d7fa8762a229e2677b5706117e7e3fa3",
+          "new_url": "https://github.com/SighanoCel/My-data-science-project/blob/main/images/Renting%20Price%20photo%20illustration.jpg"
+        },
+        {
+          "original_name": "Tof laurea 1.jpg",
+          "new_path": "images/Tof laurea 1.jpg",
+          "size_kb": 84.78,
+          "type": "JPG",
+          "sha": "61f100f0f46f3002bd50bfa9d6704df6c6f7c46a",
+          "new_url": "https://github.com/SighanoCel/My-data-science-project/blob/main/images/Tof%20laurea%201.jpg"
+        },
+        {
+          "original_name": "Tof laurea 2.jpg",
+          "new_path": "images/Tof laurea 2.jpg",
+          "size_kb": 145.94,
+          "type": "JPG",
+          "sha": "871e1106455ce789a3da00ec55fba7b001efba88",
+          "new_url": "https://github.com/SighanoCel/My-data-science-project/blob/main/images/tof%20laurea%202.jpg"
+        },
+        {
+          "original_name": "Tof laurea 3.jpg",
+          "new_path": "images/Tof laurea 3.jpg",
+          "size_kb": 102.70,
+          "type": "JPG",
+          "sha": "924a47be90400369e73d879541a0a1847e9c0abc",
+          "new_url": "https://github.com/SighanoCel/My-data-science-project/blob/main/images/tof%20laurea%203.jpg"
+        },
+        {
+          "original_name": "Universita_di_Ferrara_image.jpeg",
+          "new_path": "images/Universita_di_Ferrara_image.jpeg",
+          "size_kb": 58.58,
+          "type": "JPEG",
+          "sha": "700ee9c549b88aa92f70330165809496ab69edcd",
+          "new_url": "https://github.com/SighanoCel/My-data-science-project/blob/main/images/Universita_di_Ferrara_image.jpeg"
+        },
+        {
+          "original_name": "fraud-immage.jpeg",
+          "new_path": "images/fraud-immage.jpeg",
+          "size_kb": 197.14,
+          "type": "JPEG",
+          "sha": "9d7da9abece62ddbec40ba0a6f6bc0855cf6f896",
+          "new_url": "https://github.com/SighanoCel/My-data-science-project/blob/main/images/fraud-immage.jpeg"
+        },
+        {
+          "original_name": "photo animation.png",
+          "new_path": "images/photo animation.png",
+          "size_kb": 335.53,
+          "type": "PNG",
+          "sha": "ee6655299463d36613be169f6f86f1a1c04c08d3",
+          "new_url": "https://github.com/SighanoCel/My-data-science-project/blob/main/images/photo%20animation.png"
+        },
+        {
+          "original_name": "photo-profile.jpg",
+          "new_path": "images/photo-profile.jpg",
+          "size_kb": 60.50,
+          "type": "JPG",
+          "sha": "7e529f18a375f6dfca0986b8194d4b2ca19830be",
+          "new_url": "https://github.com/SighanoCel/My-data-science-project/blob/main/images/photo-profile.jpg"
+        },
+        {
+          "original_name": "photo2.jpg",
+          "new_path": "images/photo2.jpg",
+          "size_kb": 115.01,
+          "type": "JPG",
+          "sha": "3178267856b4b60e5532c9421c92b462f6e55cd4",
+          "new_url": "https://github.com/SighanoCel/My-data-science-project/blob/main/images/photo2.jpg"
+        },
+        {
+          "original_name": "rome business school image.jpg",
+          "new_path": "images/rome business school image.jpg",
+          "size_kb": 10.64,
+          "type": "JPG",
+          "sha": "11363a8d7bdba328d8f5113c0f8c5f446da6d3de",
+          "new_url": "https://github.com/SighanoCel/My-data-science-project/blob/main/images/rome%20business%20school%20image.jpg"
+        },
+        {
+          "original_name": "tof_firenze.jpg",
+          "new_path": "images/tof_firenze.jpg",
+          "size_kb": 233.08,
+          "type": "JPG",
+          "sha": "1f30d1ff29906bb9e9ef09d2c8e8b7f28d4df362",
+          "new_url": "https://github.com/SighanoCel/My-data-science-project/blob/main/images/tof_firenze.jpg"
+        },
+        {
+          "original_name": "udemy_image.jpg",
+          "new_path": "images/udemy_image.jpg",
+          "size_kb": 19.80,
+          "type": "JPG",
+          "sha": "b4c8bd03a9fde10feaca85c0f504587ef5860b84",
+          "new_url": "https://github.com/SighanoCel/My-data-science-project/blob/main/images/udemy_image.jpg"
+        },
+        {
+          "original_name": "universidad de valencia_image.gif",
+          "new_path": "images/universidad de valencia_image.gif",
+          "size_kb": 21.06,
+          "type": "GIF",
+          "sha": "7ddfd19fc3cbbc73ca6fd9355f1b4ebb5a68af1e",
+          "new_url": "https://github.com/SighanoCel/My-data-science-project/blob/main/images/universidad%20de%20valencia_image.gif"
+        }
+      ]
+    },
+    "web": {
+      "folder_name": "web",
+      "description": "Web files - HTML, CSS, JavaScript",
+      "structure": {
+        "html": "HTML files for portfolio website",
+        "css": "CSS stylesheets",
+        "js": "JavaScript files"
+      },
+      "file_count": 3,
+      "total_size_mb": 0.07,
+      "percentage_of_total": "0.6%",
+      "files": [
+        {
+          "original_name": "Celestin SIgne Sighano.html",
+          "new_path": "web/html/Celestin SIgne Sighano.html",
+          "size_kb": 35.22,
+          "sha": "d3c2258cda288447f24128def983884f35f448e0",
+          "new_url": "https://github.com/SighanoCel/My-data-science-project/blob/main/web/html/Celestin%20SIgne%20Sighano.html"
+        },
+        {
+          "original_name": "index.html",
+          "new_path": "web/html/index.html",
+          "size_kb": 35.22,
+          "sha": "d3c2258cda288447f24128def983884f35f448e0",
+          "new_url": "https://github.com/SighanoCel/My-data-science-project/blob/main/web/html/index.html"
+        },
+        {
+          "original_name": "my site.html",
+          "new_path": "web/html/my site.html",
+          "size_kb": 0.00,
+          "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "new_url": "https://github.com/SighanoCel/My-data-science-project/blob/main/web/html/my%20site.html"
+        }
+      ],
+      "subdirectories": [
+        {
+          "name": "css",
+          "original_path": "css",
+          "new_path": "web/css",
+          "purpose": "CSS stylesheets for web files"
+        },
+        {
+          "name": "js",
+          "original_path": "js",
+          "new_path": "web/js",
+          "purpose": "JavaScript files for web files"
+        }
+      ]
+    },
+    "config": {
+      "folder_name": "config",
+      "description": "Configuration and License files",
+      "file_count": 2,
+      "total_size_mb": 0.011,
+      "percentage_of_total": "0.1%",
+      "files": [
+        {
+          "original_name": ".gitignore",
+          "new_path": "config/.gitignore",
+          "size_kb": 0.18,
+          "sha": "fc2fd7947ed672407b79e50c5d5a1f093c7b3f4e",
+          "new_url": "https://github.com/SighanoCel/My-data-science-project/blob/main/config/.gitignore"
+        },
+        {
+          "original_name": "LICENSE",
+          "new_path": "config/LICENSE",
+          "size_kb": 11.36,
+          "type": "Apache License 2.0",
+          "sha": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+          "new_url": "https://github.com/SighanoCel/My-data-science-project/blob/main/config/LICENSE"
+        }
+      ]
+    }
+  },
+  "summary": {
+    "total_files": 54,
+    "total_size_mb": 10.97,
+    "organized_by_format": true,
+    "folders_created": 6,
+    "main_folders": [
+      "notebooks",
+      "docs",
+      "pdfs",
+      "images",
+      "web",
+      "config"
+    ],
+    "subfolder_structure": {
+      "web": ["html", "css", "js"]
+    },
+    "file_type_summary": {
+      "jupyter_notebooks": {
+        "count": 9,
+        "percentage": "16.7%",
+        "size_mb": 7.24
+      },
+      "pdfs": {
+        "count": 4,
+        "percentage": "7.4%",
+        "size_mb": 2.79
+      },
+      "images": {
+        "count": 18,
+        "percentage": "33.3%",
+        "size_mb": 0.57
+      },
+      "markdown_docs": {
+        "count": 9,
+        "percentage": "16.7%",
+        "size_mb": 0.03
+      },
+      "html_files": {
+        "count": 3,
+        "percentage": "5.6%",
+        "size_mb": 0.07
+      },
+      "config_files": {
+        "count": 2,
+        "percentage": "3.7%",
+        "size_mb": 0.011
+      }
+    }
+  },
+  "migration_instructions": {
+    "branch_name": "organize-by-format",
+    "status": "Ready for merge",
+    "steps": [
+      "1. Review ORGANIZATION_PLAN.md for detailed structure",
+      "2. Review this file for complete file mappings",
+      "3. Create Pull Request from organize-by-format to main",
+      "4. Merge PR to apply the organization",
+      "5. Update internal file references as needed"
+    ],
+    "expected_outcome": "All files organized into format-based folders for better navigation and maintainability"
+  }
+}
