@@ -10,6 +10,7 @@ Il regroupe un **portfolio web** (GitHub Pages), des **notebooks Jupyter** de pr
 |--------|-------------|
 | Site portfolio (page d’accueil) | [`index.html`](index.html) à la racine |
 | Notebooks de projets | [`notebooks/`](notebooks/) |
+| Modules Python (RAG) | [`src/`](src/) (`pdf_ingestion.py`) |
 | CV et rapports | [`pdf/`](pdf/) |
 | Photos et illustrations | [`images/`](images/) |
 | Pages HTML secondaires | [`html/`](html/) |
@@ -26,6 +27,7 @@ Il regroupe un **portfolio web** (GitHub Pages), des **notebooks Jupyter** de pr
 ├── .gitignore
 ├── css/                    # portfolio.css, style.css
 ├── js/                     # portfolio.js, gallery.js
+├── src/                    # Modules Python (ex. pdf_ingestion.py pour le RAG)
 ├── notebooks/              # Projets Jupyter (.ipynb)
 ├── pdf/                    # CV et rapports (.pdf)
 ├── images/                 # Photos et visuels (.jpg, .png, .gif, …)
@@ -45,6 +47,7 @@ Il regroupe un **portfolio web** (GitHub Pages), des **notebooks Jupyter** de pr
 | `Cancer_prediction.ipynb` | Prédiction / classification (cancer) |
 | `Car_performance_prediction.ipynb` | Performance automobile |
 | `Final_Capstone_business_analytics.ipynb` | Capstone business analytics |
+| `capstone_project_RAG_LCEL.ipynb` | Assistant RAG Capstone (LangChain LCEL) |
 | `projet_1_linear_regression.ipynb` | Régression linéaire (projet 1) |
 | `project_2_linear_regression.ipynb` | Régression linéaire (projet 2) |
 
