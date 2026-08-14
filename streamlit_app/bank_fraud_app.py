@@ -6,6 +6,9 @@ import streamlit as st
 import json
 import ast
 import re
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import recall_score, precision_score, confusion_matrix
+import numpy as np
 
 try:
     import joblib
@@ -104,6 +107,63 @@ def build_input_dataframe(values: dict) -> pd.DataFrame:
     return pd.DataFrame([row])
 
 
+def train_model_from_csv(uploaded_file, params):
+    if uploaded_file is None:
+        raise RuntimeError("No dataset provided")
+    if CatBoostClassifier is None:
+        raise RuntimeError("CatBoost is not installed in this environment")
+
+    df = pd.read_csv(uploaded_file)
+    # Drop nameOrig if present
+    if "nameOrig" in df.columns:
+        df = df.drop(["nameOrig"], axis=1)
+
+    # Parse Date if present
+    if "Date" in df.columns:
+        try:
+            df["Date"] = pd.to_datetime(df["Date"], format="%d-%b-%y")
+        except Exception:
+            df["Date"] = pd.to_datetime(df["Date"], errors="coerce")
+        df["Day"] = df["Date"].dt.day
+        df["Month"] = df["Date"].dt.month
+        df["Year"] = df["Date"].dt.year
+        df["Month_name"] = df["Date"].dt.month_name()
+
+    # Prepare X,y
+    if "isFraud" not in df.columns:
+        raise RuntimeError("Dataset must contain 'isFraud' target column")
+
+    X = df.copy()
+    drop_cols = [c for c in ["Date", "Month_name"] if c in X.columns]
+    X = X.drop(drop_cols + ["isFraud"], axis=1, errors="ignore")
+    y = df["isFraud"]
+
+    categorical_features = [c for c in ["City", "type", "Card Type", "Exp Type", "Gender"] if c in X.columns]
+
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+    model_params = params.copy()
+    if "class_weights" not in model_params:
+        model_params["class_weights"] = [1, 4.5]
+
+    model = CatBoostClassifier(**model_params)
+
+    model.fit(X_train, y_train, cat_features=categorical_features if len(categorical_features) else None,
+              eval_set=(X_test, y_test), early_stopping_rounds=20)
+
+    y_pred = model.predict(X_test)
+    recall = recall_score(y_test, y_pred)
+    precision = precision_score(y_test, y_pred)
+    cm = confusion_matrix(y_test, y_pred)
+
+    models_dir = os.path.join(os.getcwd(), "streamlit_app", "models")
+    os.makedirs(models_dir, exist_ok=True)
+    model_path = os.path.join(models_dir, "catboost_model.cbm")
+    model.save_model(model_path)
+
+    return model, model_path, {"recall": recall, "precision": precision, "confusion_matrix": cm}
+
+
 def main():
     st.set_page_config(page_title="Bank Transaction Fraud Predictor", layout="centered")
     st.title("Bank Transaction Fraud Detection — Predict")
@@ -164,6 +224,62 @@ def main():
 
     if model is None:
         st.warning("No model loaded yet. Upload a model or place it at the local path and reload.")
+
+    # Training UI: allow user to upload dataset and run training locally
+    with st.sidebar.expander("Train model from dataset"):
+        data_upload = st.file_uploader("Upload dataset CSV to train model", type=["csv"], key="train_csv")
+        train_button = st.button("Train CatBoost model using notebook pipeline")
+
+    if train_button:
+        try:
+            # Try to parse notebook params
+            nb_path = os.path.join(os.getcwd(), "notebooks", "Bank_transaction_fraud_detection.ipynb")
+            nb_params = None
+            try:
+                with open(nb_path, "r", encoding="utf-8") as f:
+                    nb = json.load(f)
+                for cell in nb.get("cells", []):
+                    if cell.get("cell_type") != "code":
+                        continue
+                    src = "".join(cell.get("source", []))
+                    if "final_model = CatBoostClassifier" in src:
+                        idx = src.find("CatBoostClassifier")
+                        idx = src.find("(", idx)
+                        count = 0
+                        end = None
+                        for i in range(idx, len(src)):
+                            if src[i] == "(":
+                                count += 1
+                            elif src[i] == ")":
+                                count -= 1
+                                if count == 0:
+                                    end = i
+                                    break
+                        if end:
+                            params_str = src[idx + 1: end]
+                            ps = re.sub(r"\s+", " ", params_str.strip())
+                            ps2 = re.sub(r"([a-zA-Z_][a-zA-Z0-9_]*)\s*=", r'"\1":', ps)
+                            dict_str = "{" + ps2 + "}"
+                            try:
+                                nb_params = ast.literal_eval(dict_str)
+                            except Exception:
+                                nb_params = None
+                        break
+            except Exception:
+                nb_params = None
+
+            if nb_params is None:
+                nb_params = dict(iterations=700, learning_rate=0.05, depth=4, loss_function="Logloss",
+                                 eval_metric="AUC", class_weights=[1, 4.5], l2_leaf_reg=3,
+                                 random_strength=1, bagging_temperature=1, verbose=100)
+
+            with st.spinner("Training model — this may take several minutes..."):
+                model_trained, model_path, metrics = train_model_from_csv(data_upload, nb_params)
+            st.success(f"Training finished. Model saved to {model_path}")
+            st.write("Metrics:", metrics)
+            model = model_trained
+        except Exception as e:
+            st.error(f"Training failed: {e}")
 
     st.subheader("Transaction input")
     with st.form("input_form"):
