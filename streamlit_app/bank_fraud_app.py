@@ -17,7 +17,6 @@ except Exception:
 
 EXPECTED_FEATURES = [
     "Date",
-    "nameOrig",
     "amount",
     "oldbalanceOrg",
     "newbalanceOrig",
@@ -110,9 +109,15 @@ def main():
         "Upload a trained model file (`.pkl`, `.joblib`, or CatBoost `.cbm`).\n\nIf you don't have a file yet, place it in `streamlit_app/models/` and reload."
     )
 
+    # Sidebar: model options
     with st.sidebar.expander("Model"):
         uploaded = st.file_uploader("Upload model file (.pkl/.joblib/.cbm)", type=["pkl", "joblib", "cbm", "bin"])
         model_path_input = st.text_input("Or local model path (relative to repo)", value="streamlit_app/models/catboost_model.cbm")
+        st.markdown("---")
+        use_catboost_default = st.checkbox("Prefer CatBoost and use notebook defaults if no model provided", value=True)
+        st.markdown("**CatBoost defaults (from notebook):**")
+        st.caption("iterations=700, learning_rate=0.05, depth=4, class_weights=[1,4.5], l2_leaf_reg=3")
+        st.caption("random_strength=1, bagging_temperature=1, eval_metric='AUC'")
 
     model = None
     # prefer uploaded
@@ -131,13 +136,35 @@ def main():
             except Exception as e:
                 st.sidebar.error(f"Failed to load model at {model_path_input}: {e}")
 
+    # If still no model and the user wants CatBoost defaults, instantiate default CatBoostClassifier
+    if model is None and use_catboost_default:
+        if CatBoostClassifier is None:
+            st.sidebar.warning("CatBoost is not installed; add 'catboost' to requirements.txt to enable defaults.")
+        else:
+            default_params = dict(
+                iterations=700,
+                learning_rate=0.05,
+                depth=4,
+                loss_function='Logloss',
+                eval_metric='AUC',
+                class_weights=[1, 4.5],
+                l2_leaf_reg=3,
+                random_strength=1,
+                bagging_temperature=1,
+                verbose=0,
+            )
+            try:
+                model = CatBoostClassifier(**default_params)
+                st.sidebar.info("Default CatBoostClassifier instantiated (untrained). Upload a trained .cbm to make predictions.")
+            except Exception as e:
+                st.sidebar.error(f"Failed to instantiate CatBoostClassifier: {e}")
+
     if model is None:
         st.warning("No model loaded yet. Upload a model or place it at the local path and reload.")
 
     st.subheader("Transaction input")
     with st.form("input_form"):
         date_val = st.date_input("Date")
-        nameOrig = st.text_input("Origin Account (nameOrig)")
         amount = st.number_input("Amount", min_value=0.0, value=0.0, format="%.2f")
         oldbalanceOrg = st.number_input("Old Balance Origin", min_value=0.0, value=0.0, format="%.2f")
         newbalanceOrig = st.number_input("New Balance Origin", min_value=0.0, value=0.0, format="%.2f")
@@ -156,7 +183,6 @@ def main():
 
         vals = {
             "Date": date_val,
-            "nameOrig": nameOrig,
             "amount": amount,
             "oldbalanceOrg": oldbalanceOrg,
             "newbalanceOrig": newbalanceOrig,
