@@ -20,6 +20,22 @@ except Exception:
     CatBoostClassifier = None
 
 
+# Categorical options as they appear (exact strings) in the training data.
+TYPE_OPTIONS = ["CASH_IN", "CASH_OUT", "DEBIT", "PAYMENT", "TRANSFER"]
+CARD_TYPE_OPTIONS = ["Classic", "Gold", "Mass", "Platinum", "Signature", "Silver"]
+EXP_TYPE_OPTIONS = [
+    "Bills",
+    "Entertainment",
+    "Food",
+    "Fuel",
+    "Grocery",
+    "Health_Fitness",
+    "Home",
+    "Personal_Care",
+    "Travel",
+]
+
+
 # Feature order must match the trained model (notebook X = df.drop(['Date','isFraud','Month_name'])).
 # The model is trained on integer Day/Month/Year, NOT on the raw Date column.
 EXPECTED_FEATURES = [
@@ -300,9 +316,9 @@ def main():
         oldbalanceOrg = st.number_input("Old Balance Origin", min_value=0.0, value=0.0, format="%.2f")
         newbalanceOrig = st.number_input("New Balance Origin", min_value=0.0, value=0.0, format="%.2f")
         City = st.text_input("City")
-        ttype = st.text_input("Type (e.g., PAYMENT, TRANSFER)")
-        card_type = st.text_input("Card Type")
-        exp_type = st.text_input("Exp Type")
+        ttype = st.selectbox("Type", TYPE_OPTIONS)
+        card_type = st.selectbox("Card Type", CARD_TYPE_OPTIONS)
+        exp_type = st.selectbox("Exp Type", EXP_TYPE_OPTIONS)
         gender = st.text_input("Gender")
 
         submitted = st.form_submit_button("Predict")
