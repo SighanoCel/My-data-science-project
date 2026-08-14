@@ -26,7 +26,9 @@ MODEL_COPY_DIR.mkdir(parents=True, exist_ok=True)
 MODEL_COPY_PATH = MODEL_COPY_DIR / "model.joblib"
 
 EXPECTED_FEATURES = [
-    "Date",
+    "Day",
+    "Month",
+    "Year",
     "amount",
     "oldbalanceOrg",
     "newbalanceOrig",
@@ -125,27 +127,21 @@ def build_input_dataframe(values: dict) -> pd.DataFrame:
         except Exception:
             row[num] = 0.0
 
-    # Date: convert to datetime and numeric timestamp + Day/Month/Year
-    d = row.get("Date")
-    if isinstance(d, (str,)):
+    # Day/Month/Year: use integers provided by the UI (model trained on separate fields)
+    for col in ("Day", "Month", "Year"):
+        v = row.get(col)
         try:
-            d = pd.to_datetime(d, errors="coerce")
+            row[col] = int(v) if v not in (None, "") else 0
         except Exception:
-            d = None
-    elif isinstance(d, datetime):
-        d = pd.to_datetime(d)
+            # coerce strings to numeric where possible
+            try:
+                row[col] = int(pd.to_numeric(v, errors="coerce") or 0)
+            except Exception:
+                row[col] = 0
 
-    if pd.isna(d) or d is None:
-        # default zeros
-        row["Date_ts"] = 0
-        row["Day"] = 0
-        row["Month"] = 0
-        row["Year"] = 0
-    else:
-        row["Date_ts"] = int(d.value // 10**9)
-        row["Day"] = int(d.day)
-        row["Month"] = int(d.month)
-        row["Year"] = int(d.year)
+    # keep Date_ts and Date as fallback numeric zeros (not used by model trained on Day/Month/Year)
+    row["Date_ts"] = 0.0
+    row["Date"] = 0.0
 
     # Ensure categorical fields are strings (CatBoost accepts strings)
     for c in ("City", "type", "Card Type", "Exp Type", "Gender"):
@@ -160,16 +156,41 @@ def build_input_dataframe(values: dict) -> pd.DataFrame:
 def preprocess_before_predict(df: pd.DataFrame, model) -> pd.DataFrame:
     # Align columns expected by model if possible
     out = df.copy()
-    # if model has feature_names_in_, align to that
-    target_cols = None
+
+    # Ensure expected numeric types for common numeric/date-derived fields
+    for col in ("amount", "oldbalanceOrg", "newbalanceOrig"):
+        if col in out.columns:
+            try:
+                out[col] = out[col].astype(float)
+            except Exception:
+                out[col] = pd.to_numeric(out[col], errors="coerce").fillna(0.0)
+
+    # Ensure Day/Month/Year are integers (model trained on separate fields)
+    for col in ("Day", "Month", "Year"):
+        if col in out.columns:
+            try:
+                out[col] = out[col].astype(int)
+            except Exception:
+                out[col] = pd.to_numeric(out[col], errors="coerce").fillna(0).astype(int)
+
+    # If model exposes feature_names_in_, strictly align to that ordering and fill missing
     if hasattr(model, "feature_names_in_"):
         target_cols = list(model.feature_names_in_)
-    # CatBoost models may not have feature_names_in_, so we avoid strict alignment
-    if target_cols:
         for c in target_cols:
             if c not in out.columns:
-                out[c] = 0
-        out = out[target_cols]
+                # fill numeric-looking names with 0, otherwise empty string
+                if c.lower() in ("amount", "oldbalanceorg", "newbalanceorig", "date", "date_ts", "day", "month", "year"):
+                    out[c] = 0
+                else:
+                    out[c] = ""
+        # cast Day/Month/Year again in case they were created above
+        for col in ("Day", "Month", "Year"):
+            if col in out.columns:
+                out[col] = pd.to_numeric(out[col], errors="coerce").fillna(0).astype(int)
+        # Return columns in the exact order expected by the model
+        return out[target_cols]
+
+    # If no feature metadata, return dataframe with available columns
     return out
 
 
@@ -220,7 +241,10 @@ def main():
 
     st.subheader("Transaction input")
     with st.form("input_form"):
-        date_val = st.date_input("Date")
+        today = datetime.now()
+        Day = st.number_input("Day", min_value=0, max_value=31, value=today.day, step=1)
+        Month = st.number_input("Month", min_value=0, max_value=12, value=today.month, step=1)
+        Year = st.number_input("Year", min_value=0, max_value=9999, value=today.year, step=1)
         amount = st.number_input("Amount", min_value=0.0, value=0.0, format="%.2f")
         oldbalanceOrg = st.number_input("Old Balance Origin", min_value=0.0, value=0.0, format="%.2f")
         newbalanceOrig = st.number_input("New Balance Origin", min_value=0.0, value=0.0, format="%.2f")
@@ -237,7 +261,9 @@ def main():
             st.stop()
 
         vals = {
-            "Date": date_val,
+            "Day": Day,
+            "Month": Month,
+            "Year": Year,
             "amount": amount,
             "oldbalanceOrg": oldbalanceOrg,
             "newbalanceOrig": newbalanceOrig,
