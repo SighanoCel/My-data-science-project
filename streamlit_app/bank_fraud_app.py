@@ -1,5 +1,4 @@
 import os
-from datetime import datetime
 
 import pandas as pd
 import streamlit as st
@@ -21,8 +20,9 @@ except Exception:
     CatBoostClassifier = None
 
 
+# Feature order must match the trained model (notebook X = df.drop(['Date','isFraud','Month_name'])).
+# The model is trained on integer Day/Month/Year, NOT on the raw Date column.
 EXPECTED_FEATURES = [
-    "Date",
     "amount",
     "oldbalanceOrg",
     "newbalanceOrig",
@@ -31,6 +31,9 @@ EXPECTED_FEATURES = [
     "Card Type",
     "Exp Type",
     "Gender",
+    "Day",
+    "Month",
+    "Year",
 ]
 
 
@@ -91,7 +94,7 @@ def predict(model, X: pd.DataFrame):
 
 
 def build_input_dataframe(values: dict) -> pd.DataFrame:
-    # Build DataFrame in expected order; unknown keys will be added as empty
+    # Build DataFrame in the exact feature order the model was trained on.
     row = {k: values.get(k, None) for k in EXPECTED_FEATURES}
     # numeric conversions
     for num in ("amount", "oldbalanceOrg", "newbalanceOrig"):
@@ -100,10 +103,13 @@ def build_input_dataframe(values: dict) -> pd.DataFrame:
             row[num] = float(v) if v not in (None, "") else 0.0
         except Exception:
             row[num] = 0.0
-    # Date: convert to ISO string
-    d = row.get("Date")
-    if isinstance(d, datetime):
-        row["Date"] = d.isoformat()
+    # Day / Month / Year are integer features entered directly by the user.
+    for intcol in ("Day", "Month", "Year"):
+        v = row.get(intcol)
+        try:
+            row[intcol] = int(v) if v not in (None, "") else 0
+        except Exception:
+            row[intcol] = 0
     return pd.DataFrame([row])
 
 
@@ -283,7 +289,13 @@ def main():
 
     st.subheader("Transaction input")
     with st.form("input_form"):
-        date_val = st.date_input("Date")
+        col_d, col_m, col_y = st.columns(3)
+        with col_d:
+            day = st.number_input("Day", min_value=1, max_value=31, value=1, step=1, format="%d")
+        with col_m:
+            month = st.number_input("Month", min_value=1, max_value=12, value=1, step=1, format="%d")
+        with col_y:
+            year = st.number_input("Year", min_value=2000, max_value=2100, value=2025, step=1, format="%d")
         amount = st.number_input("Amount", min_value=0.0, value=0.0, format="%.2f")
         oldbalanceOrg = st.number_input("Old Balance Origin", min_value=0.0, value=0.0, format="%.2f")
         newbalanceOrig = st.number_input("New Balance Origin", min_value=0.0, value=0.0, format="%.2f")
@@ -301,7 +313,6 @@ def main():
             return
 
         vals = {
-            "Date": date_val,
             "amount": amount,
             "oldbalanceOrg": oldbalanceOrg,
             "newbalanceOrig": newbalanceOrig,
@@ -310,6 +321,9 @@ def main():
             "Card Type": card_type,
             "Exp Type": exp_type,
             "Gender": gender,
+            "Day": day,
+            "Month": month,
+            "Year": year,
         }
 
         X = build_input_dataframe(vals)
