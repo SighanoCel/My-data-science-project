@@ -447,7 +447,7 @@ def main():
     # Sidebar: model options
     with st.sidebar.expander("Model"):
         uploaded = st.file_uploader("Upload model file (.pkl/.joblib/.cbm)", type=["pkl", "joblib", "cbm", "bin"])
-        model_path_input = st.text_input("Or local model path (relative to repo)", value="streamlit_app/models/catboost_model.cbm")
+        model_path_input = st.text_input("Or local model path (relative to repo)", value="Fraud_catboost_classifier.joblib")
         st.markdown("---")
         use_catboost_default = st.checkbox("Prefer CatBoost and use notebook defaults if no model provided", value=True)
         st.markdown("**CatBoost defaults (from notebook):**")
