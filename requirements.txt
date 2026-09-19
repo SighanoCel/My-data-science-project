@@ -10,5 +10,3 @@ numpy
 pandas
 scikit-learn
 joblib
-tensorflow-cpu
-imbalanced-learn

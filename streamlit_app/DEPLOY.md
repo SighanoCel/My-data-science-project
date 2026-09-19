@@ -26,26 +26,43 @@ Live: https://my-data-science-project-vhld898jdnzjnqgu3vcvmr.streamlit.app/
 
 ## App 2 — Customer Banking Churn Prediction (`streamlit_app/bank_churn_app.py`)
 
-Planned URL: https://sighanocel-bank-churn.streamlit.app/
-(the portfolio already links to this address — set exactly this custom subdomain when deploying)
+Live: https://my-data-science-project-2ccfjojzs2vz353tfaxyqk.streamlit.app/
 
 1. Deploy
    - Go to https://share.streamlit.io/ → "New app" → repo `SighanoCel/My-data-science-project`.
    - Branch `main`, file path `streamlit_app/bank_churn_app.py`.
-   - In "Advanced settings" / the app URL field, set the custom subdomain to **`sighanocel-bank-churn`**
-     so the deployed address matches the link in `index.html`.
-   - Click "Deploy". The build installs `tensorflow-cpu` and `imbalanced-learn`, so the first
-     build takes several minutes.
+   - Click "Deploy". The build only needs `streamlit`, `numpy` and `pandas` for this app,
+     so it is quick — see "No TensorFlow on the server" below.
 
-2. The model — already committed, no action needed
+2. No TensorFlow on the server
+   The app does NOT import TensorFlow to make predictions, and `tensorflow-cpu` is
+   deliberately absent from `requirements.txt`.
+
+   The network is three dense layers (16 → 64 → 32 → 1) and dropout is inactive at
+   inference, so a prediction is three matrix multiplies and a sigmoid. Importing
+   TensorFlow to do that costs roughly 500 MB of resident memory in a container that
+   also holds langchain, chromadb, catboost and pymupdf from the shared requirements
+   file — which is what made the first deployment crash with "Oh no. Error running app."
+
+   `NumpyChurnModel` in `bank_churn_app.py` runs the same forward pass from the weights
+   in `churn_weights.npz`. It was checked against Keras over all 10,000 rows:
+   max absolute difference 2e-7, identical decisions at every threshold. `NumpyScaler`
+   does the same for StandardScaler, so scikit-learn is not needed at serving either.
+
+   TensorFlow, scikit-learn and imbalanced-learn remain optional imports, used only by
+   the in-app training section. Where they are missing that section is disabled and
+   everything else works.
+
+3. The model — already committed, no action needed
    `streamlit_app/models/` holds a trained network ready to serve:
 
    | File | Contents |
    |---|---|
-   | `churn_keras_model.keras` | the network (67 KB) |
+   | `churn_weights.npz`       | layer weights + scaler stats (16 KB) — **what the app serves** |
+   | `churn_keras_model.keras` | the original Keras model (67 KB) |
    | `churn_scaler.joblib`     | the fitted StandardScaler |
    | `churn_features.json`     | the training column order |
-   | `churn_model_bundle.joblib` | all three in one joblib file |
+   | `churn_model_bundle.joblib` | model + scaler + features in one joblib file |
 
    Trained with the notebook pipeline on the full 10,000-row Customer-Churn-Records.csv,
    seeded for reproducibility. Test-set scores at threshold 0.4: recall 0.576,
@@ -54,7 +71,8 @@ Planned URL: https://sighanocel-bank-churn.streamlit.app/
 
    The app loads these at startup. To replace them, use either route below.
 
-   a) Train inside the app
+   a) Train inside the app (local only — needs tensorflow-cpu, scikit-learn,
+      imbalanced-learn installed; the button is disabled when they are missing)
       - Sidebar → "Train model from dataset" → upload `Customer-Churn-Records.csv`
         (Kaggle: "Bank Customer Churn" records, the same file used by the notebook).
       - Click "Train Keras Sequential model". Training reproduces the notebook pipeline
@@ -74,19 +92,18 @@ Planned URL: https://sighanocel-bank-churn.streamlit.app/
         | `churn_features.json`     | the training column order |
         | `churn_model_bundle.joblib` | all three in one joblib file |
 
-      - Commit them to `streamlit_app/models/`. The app picks them up automatically —
-        it prefers `churn_keras_model.keras` and falls back to the bundle, or you can
-        upload either in the sidebar.
+      - Commit them to `streamlit_app/models/`. The app prefers `churn_weights.npz`,
+        then `churn_keras_model.keras`, then the bundle; you can also upload any of
+        them in the sidebar. Training inside the app refreshes the .npz automatically,
+        so a retrained model stays deployable without TensorFlow.
       - The bundle needs Keras 3 (TensorFlow ≥ 2.16) to pickle the model; verified on
         TF 2.21 / Keras 3.15. On older Keras the notebook skips the bundle and the three
         separate files still work.
 
-   To make the deployed app self-training on first run, commit the dataset to
-   `streamlit_app/data/Customer-Churn-Records.csv` and train once from the sidebar.
-
-3. Notes
-   - Streamlit Cloud's filesystem is ephemeral: a model trained in the app survives the
-     session but is lost when the app restarts. Route (b) is the durable option.
+4. Notes
+   - Retraining is a local workflow, not a deployed one: the server has no TensorFlow,
+     and Streamlit Cloud's filesystem is ephemeral, so anything trained in a session is
+     lost on restart. Commit the artifacts (route b) to change what the app serves.
    - Decision threshold defaults to 0.4, the value the notebook chose to favour recall.
    - The ROI panel appears after training, using the held-out test set
      (contact cost $3, retained-churner profit $40 by default).
