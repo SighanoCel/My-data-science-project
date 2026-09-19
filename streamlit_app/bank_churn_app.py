@@ -57,6 +57,8 @@ MODELS_DIR = os.path.join("streamlit_app", "models")
 MODEL_PATH = os.path.join(MODELS_DIR, "churn_keras_model.keras")
 SCALER_PATH = os.path.join(MODELS_DIR, "churn_scaler.joblib")
 FEATURES_PATH = os.path.join(MODELS_DIR, "churn_features.json")
+# Single-file alternative written by the notebook: {'model', 'scaler', 'features'}.
+BUNDLE_PATH = os.path.join(MODELS_DIR, "churn_model_bundle.joblib")
 DEFAULT_CSV_PATH = os.path.join("streamlit_app", "data", "Customer-Churn-Records.csv")
 
 # Notebook defaults.
@@ -66,12 +68,28 @@ DEFAULT_REVENUE_PROFIT = 40
 
 
 def load_model_from_file(path):
-    """Load a Keras model saved as .keras / .h5 (Keras SavedModel dirs also work)."""
+    """Load a Keras model saved as .keras / .h5, or a joblib bundle/pickled model.
+
+    Returns either the model, or the {'model', 'scaler', 'features'} dict the
+    notebook's bundle contains — unpack_bundle() sorts out which.
+    """
     if path is None or not os.path.exists(path):
         return None
+    ext = os.path.splitext(path)[1].lower()
+    if ext in (".joblib", ".pkl"):
+        if joblib is None:
+            raise RuntimeError("joblib is not available in this environment")
+        return joblib.load(path)
     if keras is None:
         raise RuntimeError("TensorFlow/Keras is not installed in this environment")
     return keras.models.load_model(path)
+
+
+def unpack_bundle(obj):
+    """Split a loaded artifact into (model, scaler, feature_order)."""
+    if isinstance(obj, dict):
+        return obj.get("model"), obj.get("scaler"), obj.get("features")
+    return obj, None, None
 
 
 def load_scaler_from_file(path):
@@ -271,9 +289,10 @@ def main():
     st.markdown(
         "Predict whether a bank customer is likely to churn, using the TensorFlow Keras "
         "Sequential network from the project notebook.\n\n"
-        "The model needs a fitted `StandardScaler` alongside it. Either load a trained pair "
-        "(`.keras` + `.joblib`) in the sidebar, or train from the "
-        "`Customer-Churn-Records.csv` dataset in **Train model from dataset**."
+        "The model needs a fitted `StandardScaler` alongside it. Load either the "
+        "`churn_model_bundle.joblib` saved by the notebook, or a `.keras` model plus its "
+        "scaler, in the sidebar — or train from the `Customer-Churn-Records.csv` dataset "
+        "in **Train model from dataset**."
     )
 
     if keras is None:
@@ -285,9 +304,12 @@ def main():
 
     # Sidebar: model options
     with st.sidebar.expander("Model", expanded=True):
-        uploaded_model = st.file_uploader("Upload Keras model (.keras/.h5)", type=["keras", "h5"])
+        uploaded_model = st.file_uploader(
+            "Upload model (.keras/.h5) or joblib bundle", type=["keras", "h5", "joblib", "pkl"]
+        )
         uploaded_scaler = st.file_uploader("Upload fitted scaler (.joblib/.pkl)", type=["joblib", "pkl"])
-        model_path_input = st.text_input("Or local model path", value=MODEL_PATH)
+        default_model_path = BUNDLE_PATH if (not os.path.exists(MODEL_PATH) and os.path.exists(BUNDLE_PATH)) else MODEL_PATH
+        model_path_input = st.text_input("Or local model path", value=default_model_path)
         scaler_path_input = st.text_input("Or local scaler path", value=SCALER_PATH)
         st.markdown("---")
         st.markdown("**Network architecture (from notebook):**")
@@ -296,20 +318,32 @@ def main():
         st.caption("Dense(1, sigmoid) · adam · binary_crossentropy · recall")
         st.caption("SMOTE(sampling_strategy=0.4, k_neighbors=2) · 60 epochs")
 
+    def store_loaded(obj):
+        """Accept a bare model or a bundle, keeping any scaler/features it carries."""
+        loaded_model, loaded_scaler, loaded_features = unpack_bundle(obj)
+        if loaded_model is not None:
+            st.session_state["churn_model"] = loaded_model
+        if loaded_scaler is not None:
+            st.session_state["churn_scaler"] = loaded_scaler
+        if loaded_features:
+            st.session_state["churn_features"] = list(loaded_features)
+        return loaded_model, loaded_scaler, loaded_features
+
     if uploaded_model is not None:
         temp_model_path = os.path.join(".", "streamlit_uploaded_model" + os.path.splitext(uploaded_model.name)[1])
         with open(temp_model_path, "wb") as f:
             f.write(uploaded_model.getbuffer())
         try:
-            model = load_model_from_file(temp_model_path)
-            st.session_state["churn_model"] = model
+            model, bundled_scaler, bundled_features = store_loaded(load_model_from_file(temp_model_path))
+            scaler = bundled_scaler or scaler
+            feature_order = bundled_features or feature_order
         except Exception as e:
             st.sidebar.error(f"Failed to load uploaded model: {e}")
     elif model is None:
         try:
-            model = load_model_from_file(model_path_input)
-            if model is not None:
-                st.session_state["churn_model"] = model
+            model, bundled_scaler, bundled_features = store_loaded(load_model_from_file(model_path_input))
+            scaler = bundled_scaler or scaler
+            feature_order = bundled_features or feature_order
         except Exception as e:
             st.sidebar.error(f"Failed to load model at {model_path_input}: {e}")
 

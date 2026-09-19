@@ -49,18 +49,24 @@ Planned URL: https://sighanocel-bank-churn.streamlit.app/
         and reports recall/precision/confusion matrix on the held-out test set.
       - Artifacts are written to `streamlit_app/models/` for the rest of the session.
 
-   b) Ship a pre-trained model
-      - In the notebook, after `model.fit(...)`, save both objects:
+   b) Ship a pre-trained model (durable — recommended)
+      - The notebook `banking_churn_with_deep_learning.ipynb` now ends with a
+        "Saving the trained model for deployment" section. Run those cells after training;
+        they write four files and download them out of Colab:
 
-        ```python
-        import joblib, json
-        model.save('churn_keras_model.keras')
-        joblib.dump(scaler, 'churn_scaler.joblib')
-        json.dump(list(X.columns), open('churn_features.json', 'w'))
-        ```
+        | File | Contents |
+        |---|---|
+        | `churn_keras_model.keras` | the network |
+        | `churn_scaler.joblib`     | the fitted StandardScaler |
+        | `churn_features.json`     | the training column order |
+        | `churn_model_bundle.joblib` | all three in one joblib file |
 
-      - Commit all three to `streamlit_app/models/`. The app picks them up automatically
-        (they are the default paths in the sidebar), or upload them in the sidebar.
+      - Commit them to `streamlit_app/models/`. The app picks them up automatically —
+        it prefers `churn_keras_model.keras` and falls back to the bundle, or you can
+        upload either in the sidebar.
+      - The bundle needs Keras 3 (TensorFlow ≥ 2.16) to pickle the model; verified on
+        TF 2.21 / Keras 3.15. On older Keras the notebook skips the bundle and the three
+        separate files still work.
 
    To make the deployed app self-training on first run, commit the dataset to
    `streamlit_app/data/Customer-Churn-Records.csv` and train once from the sidebar.
