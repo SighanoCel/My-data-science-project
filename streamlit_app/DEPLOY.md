@@ -37,11 +37,24 @@ Planned URL: https://sighanocel-bank-churn.streamlit.app/
    - Click "Deploy". The build installs `tensorflow-cpu` and `imbalanced-learn`, so the first
      build takes several minutes.
 
-2. Getting a model into the app — the churn model is NOT stored in the repo
-   The Keras network only makes sense together with the `StandardScaler` it was trained with,
-   so the app supports two routes:
+2. The model — already committed, no action needed
+   `streamlit_app/models/` holds a trained network ready to serve:
 
-   a) Train inside the app (simplest)
+   | File | Contents |
+   |---|---|
+   | `churn_keras_model.keras` | the network (67 KB) |
+   | `churn_scaler.joblib`     | the fitted StandardScaler |
+   | `churn_features.json`     | the training column order |
+   | `churn_model_bundle.joblib` | all three in one joblib file |
+
+   Trained with the notebook pipeline on the full 10,000-row Customer-Churn-Records.csv,
+   seeded for reproducibility. Test-set scores at threshold 0.4: recall 0.576,
+   precision 0.598, accuracy 0.83 — in line with the notebook's own run
+   (recall 0.63, precision 0.57), the difference being unseeded weight initialization.
+
+   The app loads these at startup. To replace them, use either route below.
+
+   a) Train inside the app
       - Sidebar → "Train model from dataset" → upload `Customer-Churn-Records.csv`
         (Kaggle: "Bank Customer Churn" records, the same file used by the notebook).
       - Click "Train Keras Sequential model". Training reproduces the notebook pipeline
