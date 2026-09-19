@@ -53,13 +53,17 @@ EXPECTED_FEATURES = [
     "Point Earned",
 ]
 
-MODELS_DIR = os.path.join("streamlit_app", "models")
+# Anchored to this file, not the working directory: Streamlit Cloud launches the app
+# from the repository root, but a local `streamlit run` from another directory would
+# otherwise fail to find the model.
+APP_DIR = os.path.dirname(os.path.abspath(__file__))
+MODELS_DIR = os.path.join(APP_DIR, "models")
 MODEL_PATH = os.path.join(MODELS_DIR, "churn_keras_model.keras")
 SCALER_PATH = os.path.join(MODELS_DIR, "churn_scaler.joblib")
 FEATURES_PATH = os.path.join(MODELS_DIR, "churn_features.json")
 # Single-file alternative written by the notebook: {'model', 'scaler', 'features'}.
 BUNDLE_PATH = os.path.join(MODELS_DIR, "churn_model_bundle.joblib")
-DEFAULT_CSV_PATH = os.path.join("streamlit_app", "data", "Customer-Churn-Records.csv")
+DEFAULT_CSV_PATH = os.path.join(APP_DIR, "data", "Customer-Churn-Records.csv")
 
 # Notebook defaults.
 DEFAULT_THRESHOLD = 0.4
